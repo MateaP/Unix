@@ -6,10 +6,7 @@ then
 fi
 
 file=$1
-time=`awk '!/^ *#/ { o=$2 
-	gsub(/[^0-9]:/,"",o)
-	tmp=sprintf("%02s", o+2)
-	$2=$1 " " tmp substr($2,3, length($2)) " " $5 " " $14; }1 { print $2; }' $file`
+time=`awk '!/^ *#/ { $2=$1 " " sprintf("%02s", gsub(/[^0-9]:/,"",$2)+2) substr($2,3, length($2)) " " $5 " " $14; }1 { print $2; }' $file`
 
 echo $time
 
